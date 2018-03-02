@@ -1,0 +1,11 @@
+$bg-primary: #1976d2;
+
+.navbar {
+    background-color: $bg-primary !important;
+    .navbar-brand {
+        font-family: 'Pacifico';
+    }
+    .button-link {
+        color: #FFF;
+    }
+}
