@@ -1,5 +1,7 @@
+$main-blue: #1e3799;
+
 .jumbotron {
-    background-color: #1e3799;
+    background-color: $main-blue;
     h3.jumbo-title {
         display: inline-block;
         width: 100%;
@@ -12,4 +14,20 @@
 
 .start-button-holder {
     margin: 36px 0;
+}
+
+.tech-icon {
+    .icon-wrapper {
+        color: #FFF;
+        background-color: lighten(rgba($main-blue, .45), 10%);
+        &.circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+            width: 120px;
+            border-radius: 60px;
+        }
+        margin-bottom: 24px;
+    }
 }
