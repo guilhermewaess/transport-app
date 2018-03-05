@@ -1,3 +1,40 @@
-<p>
-  sign-up works!
-</p>
+<div class="container-fluid full-height">
+  <div class="row align-items-center justify-content-center content-wrapper vertical-aligned">
+    <div class="col-md-3 col-md-offset-6">
+      <div class="form-login-holder">
+        <div class="row">
+          <div class="col">
+            <h3>Sign Up</h3>
+            <p>In order to continue, please provide the information bellow</p>
+            <form role="form">
+              <fieldset>
+                <div class="form-group">
+                  <label for="fullname">Full name:</label>
+                  <input type="text" class="form-control" name="fullname" id="fullname" [(ngModel)]="fullName">
+                </div>
+                <div class="form-group">
+                  <label for="fullname">Email:</label>
+                  <input type="email" class="form-control" name="email" id="emal" [(ngModel)]="email">
+                </div>
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" class="form-control" name="username" id="username" [(ngModel)]="username">
+                </div>
+                <div class="form-group">
+                  <label for="password">Pasword:</label>
+                  <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password">
+                </div>
+                <div class="form-group">
+                  <label for="password">Confirm you password:</label>
+                  <input type="password" class="form-control" name="password" id="confirmPassword" [(ngModel)]="confirmPassword">
+                </div>
+                <button class="btn btn-danger pull-left">Cancel</button>
+                <button class="btn btn-primary pull-right">Sign Up</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
