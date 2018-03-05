@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { AuthenticateService } from '../../services/authenticate.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,14 +15,14 @@ export class SignInComponent implements OnInit {
     password: null
   }
 
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth, private auth: AuthenticateService) {}
 
   ngOnInit() {
     
   }
   
   login() {
-    console.log(this.user);
+    this.auth.login(this.user.username, this.user.password)
   };
 
   loginWithGoogle() {
