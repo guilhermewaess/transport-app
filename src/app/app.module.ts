@@ -21,8 +21,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ComponentsModule,
     AuthenticationModule,
+    ComponentsModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
