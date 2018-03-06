@@ -15,6 +15,9 @@ export class SignInComponent implements OnInit {
     password: null
   }
 
+  facebookProvider = new firebase.auth.FacebookAuthProvider();
+  googleProvider = new firebase.auth.GoogleAuthProvider();
+
   constructor(public afAuth: AngularFireAuth, private auth: AuthenticateService) {}
 
   ngOnInit() {
@@ -22,25 +25,11 @@ export class SignInComponent implements OnInit {
   }
   
   login() {
-    this.auth.login(this.user.username, this.user.password)
+    this.auth.login(this.user.username, this.user.password);
   };
 
-  loginWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  };
-
-  loginWithFacebook() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(
-      (res) => {
-        // TODO: After user succefully login, save data received from facebook into firebase store
-        console.log(res)
-      }
-    ).catch(
-      (error) => {
-        // TODO: handle errors
-        console.log(error)
-      }
-    );
+  loginWithProvider(provider) {
+    this.auth.loginWithProvider(provider)
   }
 
   

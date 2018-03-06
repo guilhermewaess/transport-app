@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 
 import { Observable } from 'rxjs/Observable';
+
+export interface User {
+  displayName: string;
+  email: string;
+  emailVerified: boolean;
+  uid: string;
+}
 
 @Injectable()
 export class AuthenticateService {
 
   user: Observable<firebase.User>;
 
-  constructor(private firebaseAuth: AngularFireAuth) { 
+  private userDoc: AngularFirestoreDocument<User>;
+
+  constructor(private firebaseAuth: AngularFireAuth, private firestore: AngularFirestore) { 
     this.user = firebaseAuth.authState;
   }
 
@@ -24,20 +34,33 @@ export class AuthenticateService {
   }
 
   login(email: string, password: string) {
-    this.firebaseAuth
+    return this.firebaseAuth
       .auth
       .signInWithEmailAndPassword(email, password)
-      .then(response => {
-        console.log(response)
-        return response
-      })
-      .catch(error => {
-        console.log(error)
+  }
+
+  loginWithProvider(provider) {
+    return this.firebaseAuth
+      .auth
+      .signInWithPopup(provider)
+      .then(res => {
+        this.storeLoginProvidedData(res.user);
       })
   }
+
+  storeLoginProvidedData(data) {
+    const userObj = {
+      displayName: data.displayName,
+      email: data.email,
+      emailVerified: data.emailVerified,
+      uid: data.uid
+    }
+    this.userDoc = this.firestore.doc<User>(`users/${userObj.uid}`);
+    this.userDoc.set(userObj);
+  };
   
   logout() {
-    this.firebaseAuth
+    return this.firebaseAuth
       .auth
       .signOut();
   }

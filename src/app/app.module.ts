@@ -9,9 +9,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
-import { FormsModule } from'@angular/forms'; 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthenticateService } from './services/authenticate.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @NgModule({
   declarations: [
@@ -23,10 +23,13 @@ import { AuthenticateService } from './services/authenticate.service';
     AppRoutingModule,
     ComponentsModule,
     AuthenticationModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    FormsModule
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [AngularFireAuth, AuthenticateService],
+  providers: [
+    AngularFireAuth,
+    AngularFirestore,
+    AuthenticateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
