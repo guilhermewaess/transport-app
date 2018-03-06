@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AuthenticateService } from '../../services/authenticate.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,22 +11,28 @@ import { AuthenticateService } from '../../services/authenticate.service';
 })
 export class SignInComponent implements OnInit {
 
-  user = {
-    username: null,
-    password: null
-  }
+  loginForm: FormGroup;
+  formData: any;
+  username: string;
+  password: string;
+  alertInfo: 'This field is required';
 
   facebookProvider = new firebase.auth.FacebookAuthProvider();
   googleProvider = new firebase.auth.GoogleAuthProvider();
 
-  constructor(public afAuth: AngularFireAuth, private auth: AuthenticateService) {}
+  constructor(public afAuth: AngularFireAuth, private auth: AuthenticateService, formBuilder: FormBuilder) {
+    this.loginForm = formBuilder.group({
+      'username': [null, Validators.required],
+      'password': [null, Validators.required]
+    })
+  }
 
   ngOnInit() {
     
   }
   
   login() {
-    this.auth.login(this.user.username, this.user.password);
+    this.auth.login(this.username, this.password);
   };
 
   loginWithProvider(provider) {

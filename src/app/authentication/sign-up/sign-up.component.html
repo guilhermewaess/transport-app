@@ -10,26 +10,31 @@
               <fieldset>
                 <div class="form-group">
                   <label for="fullname">Full name:</label>
-                  <input type="text" class="form-control" name="fullname" id="fullname" [(ngModel)]="fullName">
+                  <input type="text" class="form-control" name="fullname" id="fullname" [(ngModel)]="fullName" required>
+                  <span>Esse campo é obrigatório</span>
                 </div>
                 <div class="form-group">
                   <label for="fullname">Email:</label>
-                  <input type="email" class="form-control" name="email" id="emal" [(ngModel)]="email">
+                  <input type="email" class="form-control" name="email" id="emal" [(ngModel)]="email" required>
+                  <span>Esse campo é obrigatório</span>
                 </div>
                 <div class="form-group">
                   <label for="username">Username:</label>
-                  <input type="text" class="form-control" name="username" id="username" [(ngModel)]="username">
+                  <input type="text" class="form-control" name="username" id="username" [(ngModel)]="username" required>
+                  <span>Esse campo é obrigatório</span>
                 </div>
                 <div class="form-group">
                   <label for="password">Pasword:</label>
-                  <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password">
+                  <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" required>
+                  <span>Os campos senha não conferem</span>
                 </div>
                 <div class="form-group">
                   <label for="password">Confirm you password:</label>
-                  <input type="password" class="form-control" name="password" id="confirmPassword" [(ngModel)]="confirmPassword">
+                  <input type="password" class="form-control" name="password" id="confirmPassword" [(ngModel)]="confirmPassword" required>
+                  <span>Os campos senha não conferem</span>
                 </div>
                 <button class="btn btn-danger pull-left">Cancel</button>
-                <button class="btn btn-primary pull-right">Sign Up</button>
+                <button class="btn btn-primary pull-right" (click)="signUp()">Sign Up</button>
               </fieldset>
             </form>
           </div>
