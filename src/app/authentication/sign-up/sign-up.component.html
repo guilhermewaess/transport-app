@@ -6,32 +6,27 @@
           <div class="col">
             <h3>Sign Up</h3>
             <p>In order to continue, please provide the information bellow</p>
-            <form role="form">
+            <form [formGroup]="signUpForm">
               <fieldset>
                 <div class="form-group">
                   <label for="fullname">Full name:</label>
-                  <input type="text" class="form-control" name="fullname" id="fullname" [(ngModel)]="fullName" required>
+                  <input type="text" class="form-control" id="fullname" formControlName="fullName">
                   <span>Esse campo é obrigatório</span>
                 </div>
                 <div class="form-group">
                   <label for="fullname">Email:</label>
-                  <input type="email" class="form-control" name="email" id="emal" [(ngModel)]="email" required>
-                  <span>Esse campo é obrigatório</span>
-                </div>
-                <div class="form-group">
-                  <label for="username">Username:</label>
-                  <input type="text" class="form-control" name="username" id="username" [(ngModel)]="username" required>
+                  <input type="email" class="form-control" id="email" formControlName="email">
                   <span>Esse campo é obrigatório</span>
                 </div>
                 <div class="form-group">
                   <label for="password">Pasword:</label>
-                  <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" required>
+                  <input type="password" class="form-control" id="password" formControlName="password">
                   <span>Os campos senha não conferem</span>
                 </div>
                 <div class="form-group">
                   <label for="password">Confirm you password:</label>
-                  <input type="password" class="form-control" name="password" id="confirmPassword" [(ngModel)]="confirmPassword" required>
-                  <span>Os campos senha não conferem</span>
+                  <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                  <!-- <form-errors-presenter [field]="signUpForm"></form-errors-presenter> -->
                 </div>
                 <button class="btn btn-danger pull-left">Cancel</button>
                 <button class="btn btn-primary pull-right" (click)="signUp()">Sign Up</button>
