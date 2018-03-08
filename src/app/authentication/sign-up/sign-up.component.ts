@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { matchPassword } from '../../customValidators/matchPassword';
-import { CustomValidators } from '../../customValidators/matchPassword';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { CustomValidators } from '../../customValidators/CustomValidators';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
 
   signUpForm: FormGroup;
   user = {
@@ -19,18 +18,22 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
+  }
 
-  ngOnInit() {
-    this.signUpForm = new FormGroup(
-      {
-        'fullName': new FormControl(this.user.fullName, [Validators.minLength(10)]),
-        'email': new FormControl(this.user.email, [Validators.email]),
-        'password': new FormControl(this.user.password, [Validators.required]),
-        'confirmPassword': new FormControl(this.user.confirmPassword, [CustomValidators.matchFields(this.signUpForm)]),
-      },
-      // { validators: CustomValidators.matchFields('password', 'confirmPassword') }
-    );
+  private createForm() {
+    this.signUpForm = this.formBuilder.group({
+      fullName: [this.user.fullName],
+      email: [this.user.email],
+      passwords: this.formBuilder.group(
+        {
+          password: [this.user.password],
+          confirmPassword: [this.user.confirmPassword],
+        },
+        { validator: CustomValidators.groupMatch(['Password', 'Confirm Password']) }
+      )
+    })
   }
 
 }
