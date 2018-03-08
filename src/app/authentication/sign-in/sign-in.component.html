@@ -6,18 +6,20 @@
           <div class="col">
             <h3>Sign In</h3>
             <p>In order to log in, put your credential details</p>
-            <form role="form">
+            <form [formGroup]="loginForm">
               <fieldset>
                 <div class="form-group">
-                  <label for="username">Username:</label>
-                  <input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username">
+                  <label for="email">E-mail:</label>
+                  <input type="text" class="form-control" name="email" id="email" formControlName="email">
+                  <form-errors-presenter [field]="loginForm.controls.email"></form-errors-presenter>
                 </div>
                 <div class="form-group">
                   <label for="password">Password:</label>
-                  <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password">
+                  <input type="password" class="form-control" name="password" id="password" formControlName="password">
+                  <form-errors-presenter [field]="loginForm.controls.password"></form-errors-presenter>
                 </div>
                 <button class="btn btn-danger pull-left">Cancel</button>
-                <button class="btn btn-primary pull-right" (click)="login()">Log In</button>
+                <button class="btn btn-primary pull-right" (click)="login()" [disabled]="!loginForm.valid">Log In</button>
                 <button class="btn btn-link pull-right" routerLink="/sign-up">Not registered yet? Sign up</button>
               </fieldset>
             </form>
@@ -28,8 +30,8 @@
               <i class="fab fa-google"></i> Log in with Google
             </button>
             <button class="btn btn-block btn-primary" (click)="loginWithProvider(facebookProvider)">
-                <i class="fab fa-facebook-f"></i> Log in with Facebook
-              </button>
+              <i class="fab fa-facebook-f"></i> Log in with Facebook
+            </button>
           </div>
         </div>
       </div>

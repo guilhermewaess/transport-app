@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AuthenticateService } from '../../services/authenticate.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,33 +12,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
-  formData: any;
-  username: string;
+
+  email: string;
   password: string;
-  alertInfo: 'This field is required';
 
   facebookProvider = new firebase.auth.FacebookAuthProvider();
   googleProvider = new firebase.auth.GoogleAuthProvider();
 
-  constructor(public afAuth: AngularFireAuth, private auth: AuthenticateService, formBuilder: FormBuilder) {
-    this.loginForm = formBuilder.group({
-      'username': [null, Validators.required],
-      'password': [null, Validators.required]
+  constructor(private auth: AuthenticateService) { }
+
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      'email': new FormControl(this.email, [Validators.email]),
+      'password': new FormControl(this.password, [Validators.required, Validators.minLength(4)]),
     })
   }
 
-  ngOnInit() {
-    
-  }
-  
   login() {
-    this.auth.login(this.username, this.password);
+    this.auth.login(this.email, this.password);
   };
 
   loginWithProvider(provider) {
     this.auth.loginWithProvider(provider)
   }
 
-  
+
 
 }
